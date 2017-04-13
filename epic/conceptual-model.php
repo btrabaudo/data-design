@@ -15,30 +15,25 @@
                     <ol>
                         <li>Profile</li>
                             <ul>
-                                <li><strong>Attributes</strong></li>
-                                    <ul>
-                                        <li>profileId</li>
-                                        <li>profileAtHandle</li>
-                                        <li>profileEmail</li>
-                                    </ul>
+
+                                <li>profileId</li>
+                                <li>profileAtHandle</li>
+                                <li>profileEmail</li>
+
                             </ul>
                         <li>Product</li>
                             <ul>
-                                <li><strong>Attributes</strong></li>
-                                    <ul>
-                                        <li>productId</li>
-                                        <li>productContent</li>
-                                        <li>productProfileId</li>
 
-                                    </ul>
+                                <li>productId</li>
+                                <li>productContent</li>
+                                <li>productProfileId</li>
+
                             </ul>
                         <li>Favorite Product (Weak)</li>
                             <ul>
-                                <li><strong>Attributes</strong></li>
-                                    <ul>
-                                        <li>favoriteProductId</li>
-                                        <li>favoriteProfileId</li>
-                                    </ul>
+
+                                <li>favoriteProductId</li>
+                                <li>favoriteProfileId</li>
 
                             </ul>
                     </ol>
