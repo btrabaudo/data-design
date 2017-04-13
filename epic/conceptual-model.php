@@ -20,8 +20,9 @@
                                 <li>profileAtHandle</li>
                                 <li>profileEmail</li>
                                 <li>profileValidationToken (Primary)</li>
-                                <li>profileIdHash</li>
-                                <li>profileIdSalt</li>
+                                <li>profilePass (Primary)</li>
+                                <li>profilePassHash</li>
+                                <li>profilePassSalt</li>
 
                             </ul>
                         <li>Product</li>
