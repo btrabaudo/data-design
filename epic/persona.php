@@ -16,6 +16,8 @@
 
             <p><strong>Age:</strong>30</p>
 
+            <p><strong>User Story:</strong>Jesse, wants to favorite a health and wellness product.</p>
+
             <p><strong>Work Life:</strong> Jesse, is a sales executive at a paper supply company. He has an MBA from a mid tier college. After college he followed a traditional path through an internship and landed his first job. He has had one promotion and works long hours in a high demand industry.</p>
 
             <p><strong>Personal Life:</strong> Do to his high intensity job and the long hours he works, Jesse is often looking for ways to release stress when away from work. As a college student he was on the swim team and generally athletic. This includes venturing into various low intensity athletic activities and also extensive partying with his peers on the weekend. He is interested in the approval of his friends and likes being able to share his opinion on the products that interest him.</p>
