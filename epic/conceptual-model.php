@@ -19,7 +19,7 @@
                                 <li>profileId (Primary)</li>
                                 <li>profileAtHandle</li>
                                 <li>profileEmail</li>
-                                <li>profileValidationToken (Primary)</li>
+                                <li>profileValidationToken</li>
                                 <li>profilePass (Primary)</li>
                                 <li>profilePassHash</li>
                                 <li>profilePassSalt</li>
@@ -31,6 +31,7 @@
                                 <li>productId (Primary)</li>
                                 <li>productContent</li>
                                 <li>productPrice</li>
+                                <li>productDate</li>
 
                             </ul>
                         <li>Favorites Product (Weak)</li>
@@ -38,6 +39,7 @@
 
                                 <li>favoriteProductId (Composite)</li>
                                 <li>favoriteProfileId (Composite)</li>
+                                <li>favoriteDate</li>
 
                             </ul>
                     </ol>
