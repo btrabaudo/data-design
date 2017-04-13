@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Data Design</title>
+        <title>Persona</title>
         <!--h1 is used for assignment title only. This is the persona for a user who wants to "favorite a product"  -->
     </head>
 

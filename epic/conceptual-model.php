@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Data Design</title>
+        <title>Conceptual Model</title>
     </head>
     <body>
         <header>

@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Data Design</title>
+        <title>Use Case</title>
+        <!--Use Case along with sample interaction flow resulting in liking a product.-->
     </head>
 
     <body>
@@ -21,7 +22,17 @@
 
             <p><strong>Conclusions:</strong> Jesse will need a site that understands his needs and can effectively target him. Based on his persona he needs a site that allows him to efficiently purchase and rate products.</p>
 
-
+            <h2>Interaction Flow</h2>
+                <ol>
+                    <li>Jesse navigates to site</li>
+                    <li>Site presents Jesse with login</li>
+                    <li>Jesse logs in</li>
+                    <li>Site directs Jesse to his profile with targeted marketing</li>
+                    <li>Jesse clicks on marketing</li>
+                    <li>Site directs him to products</li>
+                    <li>Jesse likes product a,b,c, etc</li>
+                    <li>Site records Jesse's likes</li>
+                </ol>
 
 
 
