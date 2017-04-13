@@ -16,24 +16,27 @@
                         <li>Profile</li>
                             <ul>
 
-                                <li>profileId</li>
+                                <li>profileId (Primary)</li>
                                 <li>profileAtHandle</li>
                                 <li>profileEmail</li>
+                                <li>profileValidationToken (Primary)</li>
+                                <li>profileIdHash</li>
+                                <li>profileIdSalt</li>
 
                             </ul>
                         <li>Product</li>
                             <ul>
 
-                                <li>productId</li>
+                                <li>productId (Primary)</li>
                                 <li>productContent</li>
-                                <li>productProfileId</li>
+                                <li>productPrice</li>
 
                             </ul>
-                        <li>Favorite Product (Weak)</li>
+                        <li>Favorites Product (Weak)</li>
                             <ul>
 
-                                <li>favoriteProductId</li>
-                                <li>favoriteProfileId</li>
+                                <li>favoriteProductId (Composite)</li>
+                                <li>favoriteProfileId (Composite)</li>
 
                             </ul>
                     </ol>
