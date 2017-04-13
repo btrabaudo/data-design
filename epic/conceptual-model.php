@@ -20,7 +20,6 @@
                                 <li>profileAtHandle</li>
                                 <li>profileEmail</li>
                                 <li>profileValidationToken</li>
-                                <li>profilePass (Primary)</li>
                                 <li>profilePassHash</li>
                                 <li>profilePassSalt</li>
 
