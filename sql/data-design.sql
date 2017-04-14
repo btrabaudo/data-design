@@ -13,6 +13,7 @@ profilePassSalt CHAR (64) NOT NULL,
 UNIQUE(profileEmail),
 UNIQUE(profileAtHandle)
 PRIMARY KEY(profileId)
+
 );
 
 CREATE TABLE product (
@@ -21,5 +22,22 @@ productId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 productContent VARCHAR (128) NOT NULL,
 productPrice DECIMAL NOT NULL,
 productDate DATETIME NOT NULL,
+PRIMARY KEY (productId)
 
-)
+);
+
+CREATE TABLE favorite (
+
+favoriteProfileId INT UNSIGNED NOT NULL,
+favoriteProductId INT UNSIGNED NOT NULL,
+favortieDate DATETIME NOT NULL,
+
+INDEX(favoriteProfileId),
+INDEX(favoriteProductId),
+
+FOREIGN KEY(favoriteProductId)
+FOREIGN KEY(favoriteProfileId)
+
+PRIMARY KEY(favoriteProductId, favoriteProfileId)
+
+);
