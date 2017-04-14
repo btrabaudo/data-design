@@ -19,7 +19,7 @@ CREATE TABLE product (
   productId INT UNSIGNED AUTO_INCREMENT NOT NULL,
   productContent VARCHAR(128) NOT NULL,
   productPrice DECIMAL(6,2) NOT NULL,
-  productDate DATE(3) NOT NULL,
+  productDate DATE NOT NULL,
   PRIMARY KEY (productId)
 
 );
