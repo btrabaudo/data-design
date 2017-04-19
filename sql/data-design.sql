@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS profile;
 
 CREATE TABLE profile (
 
-  profileID INT UNSIGNED AUTO_INCREMENT NOT NULL,
+  profileId INT UNSIGNED AUTO_INCREMENT NOT NULL,
   profileActivationToken CHAR(32),
   profileAtHandle VARCHAR(32) UNIQUE NOT NULL,
   profileEmail VARCHAR(128) UNIQUE NOT NULL,
