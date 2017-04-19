@@ -23,6 +23,8 @@ class Product {
      */
     private $productDate;
 
+
+
     /**
      * accessor for product id
      * @return int|null $productId

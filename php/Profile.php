@@ -36,6 +36,22 @@ class Profile {
 
     /** There should be a public function construct here */
 
+    public function __construct(?int $newProfileId, string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, string $newProfilePassHash, string $newProfileSaltHash) {
+        try {
+            $this->setProfileId($newProfileId);
+            $this->setProfileActivationToken($newProfileActivationToken);
+            $this->setProfileAtHandle($newProfileAtHandle);
+            $this->setProfileEmail($newProfileEmail);
+            $this->setProfilePassHash($newProfilePassHash);
+            $this->setProfileSaltHash($newProfileSaltHash);
+
+        }
+        catch (\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+            $exceptionType = get_class($exception);
+            throw(new $exceptionType($exception->getMessage(), 0, $exception));
+        }
+    }
+
     /**
      * accessor method for profile id
      *
