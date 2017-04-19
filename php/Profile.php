@@ -43,7 +43,7 @@ class Profile {
      */
 
     /**
-     * @return int
+     * @return int|null value
      */
     public function getProfileId() : ?int {
         return($this->profileId);
