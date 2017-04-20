@@ -1,4 +1,6 @@
 <?php
+namespace Edu\Cnm\DataDesign;
+require_once ("autoload.php");
 
 /**
  * Product Class for Data Design
@@ -43,7 +45,7 @@ class Product
 
     public function setProductId(int $newProductId): void
     {
-        //enforce that product id is not null
+        //if product id is null return it
         if ($newProductId === null) {
             $this->productId = null;
             return;

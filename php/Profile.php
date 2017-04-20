@@ -1,4 +1,5 @@
 <?php
+namespace Edu\Cnm\DataDesign;
 /**
  * Profile for Data Design
  * @author QED <prop1@qed.net>
