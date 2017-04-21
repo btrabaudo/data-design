@@ -6,8 +6,7 @@ require_once ("autoload.php");
  * Product Class for Data Design
  * author OED prop1@qed.net
  */
-class Product
-{
+class Product {
     /**
      * Id for product Id
      * @var int $productId
