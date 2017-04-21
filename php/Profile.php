@@ -264,8 +264,9 @@ class Profile {
         //store this salt
         $this->profileSaltHash = $newProfileSaltHash;
     }
-
-
+/**
+ * DATE TIME GOES HERE
+ */
 
 
 

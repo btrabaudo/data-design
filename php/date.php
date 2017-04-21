@@ -2,12 +2,12 @@
 namespace Edu\Cnm\DataDesign;
 
 /**
- *Trait valadates a mySQL Date
+ *Trait validateDate a mySQL Date
  *
  * Thanks to Dylan McDonald
  */
 
-trait validateDate {
+trait ValidateDate {
     /**
      * custom filter for mySQL date
      *

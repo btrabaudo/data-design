@@ -22,9 +22,37 @@ class Product
      */
     private $productPrice;
     /**
-     * @var string $productDate
+     * @var \DateTime $productDate
      */
     private $productDate;
+
+    /**
+     * constructor for this product
+     *
+     * @param int|null $newProductId
+     * @param string $newProductContent
+     * @param float $newProductPrice
+     * @param \DateTime|string|null $newProductDate
+     *
+     * @throws \InvalidArgumentException
+     * @throws \RangeException
+     * @throws \TypeError
+     * @throws \Exception
+     */
+
+    public function __construct(?int $newProductId, string $newProductContent, float $newProductPrice, $newProductDate = null) {
+        try{
+            $this->setProductId($newProductId);
+            $this->setProductContent($newProductContent);
+            $this->setProductPrice($newProductPrice);
+            $this->setProductDate($newProductDate);
+        }
+        //determine the type of exception
+        catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+            $exceptionType = get_class($exception);
+                throw(new $exceptionType($exception->getMessage(), 0, $exception));
+        }
+    }
 
 
     /**
@@ -86,7 +114,7 @@ class Product
 
         //enforce 128 characters in product content
         if (strlen($newProductContent) !== 128) {
-            throw(new RangeException("product content must be 128 characters"));
+            throw(new \RangeException("product content must be 128 characters"));
         }
     }
 
@@ -115,7 +143,44 @@ class Product
         //store product price
         $this->productPrice = $newProductPrice;
     }
-    /** Datetime function goes here */
 
+    /**
+     * accessor method for product date
+     * @return \DateTime value of product date
+     */
+    public function getProductDate(): \DateTime {
+        return $this->productDate;
+    }
+
+    /**
+     * @param \DateTime $productDate
+     */
+    public function setProductDate($newProductDate = null): void {
+        if($newProductDate === null) {
+            $this->productDate = new \DateTime();
+            return;
+        }
+        try {
+            $newProductDate = self::validateDateTime($newProductDate);
+        } catch (\InvalidArgumentException | \RangeException  $exception) {
+            $exceptionType = get_class($exception);
+            throw(new $exceptionType($exception->getMessage(), 0, $exception));
+        }
+        $this->productDate = $newProductDate;
+    }
+
+
+/**
+ * formats the state variables for JSON serialization
+ *
+ * @return array resulting state variables to serialize
+ **/
+
+    public function jsonSerialize() {
+        $fields = get_object_vars($this);
+        //format the sate so that the front end can consume it
+        $fields["productDate"] = round(floatval($this->productDate->format("U.u")) * 1000);
+        return($fields);
+    }
 
 }
