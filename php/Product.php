@@ -99,7 +99,7 @@ class Product implements \jsonSerialize{
      * @throws \RangeException if product content is more than 128 characters
      */
     public function setProductContent(string $newProductContent): void {
-
+        $newProductContent = filter_var($newProductContent, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
         //enforce alphanumeric in product content
         if (!ctype_alnum($newProductContent)) {
             throw(new \InvalidArgumentException("product content must be alphanumeric"));
