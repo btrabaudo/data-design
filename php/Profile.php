@@ -281,6 +281,30 @@ class Profile {
         $statement->execute($parameters);
     }
 
+    /**
+     * deletes this profile from mySQL
+     *
+     * @params \PDO $pdo connection object
+     * @throws \PDOException when mySQL related errors occur
+     * @throws \TypeError if $pdo is not a PDO connection object
+     **/
+
+    public function delete(\PDO $pdo) : void {
+        //enforces that profileId is not null
+
+        if($this->profileId === null) {
+            throw(new \PODException ("unable to update a profile that does not exisit"));
+        }
+        // create query
+        $query = "UPDATE profile SET profileId = :profileId, profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileEmail = :profileEmail, profilePassHash = :profilePassHash, profilePassSalt = :profilePassSalt";
+        $statement = $pdo->prepare($query);
+
+        //bind the variables to the place holders in the template
+
+        $parameters = ["profileId" => $this->profileId, "profileActivationToken" => $this-> profileActivationToken, "profileAtHandle" => $this-> profileActivationToken, "profileEmail" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profilePassHash" => $this->profilePassHash, "profilePassSalt" => $this->profilePassSalt];
+        $statement->execute($parameters);
+    }
+
 
 
 
