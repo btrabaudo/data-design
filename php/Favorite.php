@@ -4,7 +4,7 @@
 namespace Edu\Cnm\DataDesign;
 require_once("autoload.php");
 
-class Favorite implements \JsonSerializable {
+class Favorite {
     use ValidateDate;
     /**
      * id for favorite product id
@@ -49,6 +49,55 @@ class Favorite implements \JsonSerializable {
             $exceptionType = get_class($exception);
             throw(new $exceptionType($exception->getMessage(), 0, $exception));
         }
+    }
+
+    /**
+     * acessor for favorite product id
+     * @return int
+     */
+    public function getFavoriteProductId(): ?int {
+        return ($this->favoriteProductId);
+    }
+
+    /**
+     * @param int $newFavoriteProduct
+     */
+    public function setFavoriteProductId(?int $newFavoriteProductId) : void {
+
+        if ($newFavoriteProductId === null) {
+            $this->$newFavoriteProductId = null;
+            return;
+        }
+        if ($newFavoriteProductId <= 0) {
+            throw (new \RangeException("favorite product id is not positive"));
+        }
+        //Store this favorite product id
+
+        $this->favoriteProductId = $newFavoriteProductId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFavoriteProfileId(): ?int {
+        return ($this->favoriteProfileId);
+    }
+
+    /**
+     * @param int $favoriteProfileId
+     */
+    public function setFavoriteProfileId(?int $newFavoriteProfileId) {
+
+        if ($newFavoriteProfileId === null) {
+            $this->$newFavoriteProfileId = null;
+            return;
+        }
+
+        if ($newFavoriteProfileId <= 0) {
+            throw (new \RangeException("Favorite profile id is not positive"));
+        }
+        //Store this profile id
+        $this->favoriteProfileId = $newFavoriteProfileId;
     }
 
 

@@ -6,7 +6,7 @@ require_once ("autoload.php");
  * Product Class for Data Design
  * author OED prop1@qed.net
  */
-class Product {
+class Product implements \jsonSerialize{
     /**
      * Id for product Id
      * @var int $productId
@@ -58,8 +58,7 @@ class Product {
      * accessor for product id
      * @return int|null $productId
      */
-    public function getProductId(): ?int
-    {
+    public function getProductId(): ?int {
         return ($this->productId);
     }
 
@@ -70,13 +69,11 @@ class Product {
      * @throws \InvalidArgumentException if product id is not an integer
      */
 
-    public function setProductId(int $newProductId): void
-    {
+    public function setProductId(int $newProductId): void {
         //if product id is null return it
         if ($newProductId === null) {
             $this->productId = null;
             return;
-
         }
         //enforce that product id is a positive int
         if ($newProductId <= 0) {
@@ -91,8 +88,7 @@ class Product {
      * accessor for product content
      * @return string for product content
      */
-    public function getProductContent(): string
-    {
+    public function getProductContent(): string {
         return $this->productContent;
     }
 
@@ -102,9 +98,7 @@ class Product {
      * @throws \InvalidArgumentException if content is not alphanumeric
      * @throws \RangeException if product content is more than 128 characters
      */
-    public function setProductContent(string $newProductContent): void
-    {
-
+    public function setProductContent(string $newProductContent): void {
 
         //enforce alphanumeric in product content
         if (!ctype_alnum($newProductContent)) {
@@ -115,6 +109,8 @@ class Product {
         if (strlen($newProductContent) !== 128) {
             throw(new \RangeException("product content must be 128 characters"));
         }
+
+        $this->productContent = $newProductContent;
     }
 
     /**
@@ -122,8 +118,7 @@ class Product {
      * @return float for product price
      */
     public
-    function getProductPrice(): float
-    {
+    function getProductPrice(): float {
         return $this->productPrice;
     }
 
@@ -132,8 +127,7 @@ class Product {
      * @param float $newProductPrice
      * @throw \RangeException if content is not positive
      */
-    public function setProductPrice(float $newProductPrice): void
-    {
+    public function setProductPrice(float $newProductPrice): void {
         //enforce product price as a positive integer
         if ($newProductPrice < 0) {
             throw(new \InvalidArgumentException("product price must be positive"));
