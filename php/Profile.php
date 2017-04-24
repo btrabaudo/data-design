@@ -264,9 +264,23 @@ class Profile {
         //store this salt
         $this->profileSaltHash = $newProfileSaltHash;
     }
-/**
- * DATE TIME GOES HERE
- */
+
+    /**
+     * @param \PDO $pdo connection object
+     * @throws \PDOException when mySQL related errors occur
+     * @throws \TypeError of $pdo is not a PDO connection object
+     *
+     */
+    public function insert(\PDO $pdo) : void {
+        if($this->profileId === null) {
+            throw(new \PDOException("unable to delete a tweet that does not exist"));
+        }
+         $query = "INSERT INTO profile(profileID, profileActivationToken, profileAtHandle, profileEmail, profilePassHash, profilePassSalt) VALUES (:profileId, :profileActicationToken, :profileAtHandle, :profileEmail, :profilePassHash, :profilePassSalt)";
+        $statement = $pdo->prepare($query);
+        $parameters = ["profileId" => $this->profileId];
+        $statement->execute($parameters);
+    }
+
 
 
 

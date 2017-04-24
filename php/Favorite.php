@@ -41,7 +41,7 @@ class Favorite {
     public function __construct(?int $newFavoriteProductId, ?int $newFavoriteProfileId, $newFavoriteDate = null){
         try {
             $this->setFavoriteProductId($newFavoriteProductId);
-            $this->setFavortieProfileId($newFavoriteProductId);
+            $this->setFavoriteProfileId($newFavoriteProductId);
             $this->setFavoriteDate($newFavoriteDate);
         }
 
@@ -100,5 +100,26 @@ class Favorite {
         $this->favoriteProfileId = $newFavoriteProfileId;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getFavoriteDate(): \DateTime {
+        return ($this->favoriteDate);
+    }
+
+    public function setFavoriteDate($newFavoriteDate = null) : void {
+        if($newFavoriteDate === null) {
+            $this->favoriteDate = new \DateTime();
+            return;
+        }
+
+        try {
+            $newFavoriteDate = self::validateDate($newFavoriteDate);
+        } catch(\InvalidArgumentException | \RangeException $exception) {
+            $exceptionType = get_class($exception);
+            throw(new $exceptionType($exception->getMessage(), 0, $exception));
+        }
+        $this->favoriteDate = $newFavoriteDate;
+    }
 
 }
