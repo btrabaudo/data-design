@@ -296,17 +296,63 @@ class Profile {
             throw(new \PODException ("unable to update a profile that does not exisit"));
         }
         // create query
-        $query = "UPDATE profile SET profileId = :profileId, profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileEmail = :profileEmail, profilePassHash = :profilePassHash, profilePassSalt = :profilePassSalt";
+        $query = "UPDATE profile SET profileId = :profileId, profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileEmail = :profileEmail, profilePassHash = :profilePassHash, profileSaltHash = :profileSaltHash";
         $statement = $pdo->prepare($query);
 
         //bind the variables to the place holders in the template
 
-        $parameters = ["profileId" => $this->profileId, "profileActivationToken" => $this-> profileActivationToken, "profileAtHandle" => $this-> profileActivationToken, "profileEmail" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profilePassHash" => $this->profilePassHash, "profilePassSalt" => $this->profilePassSalt];
+        $parameters = ["profileId" => $this->profileId, "profileActivationToken" => $this-> profileActivationToken, "profileAtHandle" => $this-> profileAtHandle, "profileEmail" => $this->profileEmail, "profilePassHash" => $this->profilePassHash, "profileSaltHash" => $this->profileSaltHash];
         $statement->execute($parameters);
     }
 
-
-
+    /**
+     *Updates this profile in mySQL
+     *@param \PDO $pdo PDO connection style
+     * @throws \PDOException when mySQL related errors occur
+     * @throws \TypeError if $pdo is not a pdo connection object
+     **/
+    public function update(\PDO $pdo) : void {
+        //enforce the profileId is not null
+        if($this->profileId === null) {
+            throw(new \PDOException("unable to update a profile that does not exist"));
+        }
+        $query = "UPDATE profile SET profileAtHandle = :profileAtHandle, profileEmail = :profileEmail";
+        $statement = $pdo->prepare($query);
+        $parameters = ["profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail];
+        $statement->execute($parameters);
+    }
+    /**
+     * gets profile by profile id
+     * @param \PDO $pdo PDO connection object
+     * @param int $profileId profile id to search for
+     * @return $profile\null profile found or not foudn
+     * @throws \PDOException when mySQL related errors occur
+     * @throws \TypeError when variables are not the correct data type
+     **/
+    public static function getProfileByProfileId(\PDO $pdo, int $profileId) : ?Profile {
+        // sanitize this profile id
+        if($profileId <= 0) {
+                throw(new \PDOException("profile id is not positive"));
+        }
+        // create query
+        $query = "SELECT profileId, profileAtHandle, profileEmail FROM profile WHERE profileID = :profileId";
+        $statement = $pdo->prepare($query);
+        $parameters = ["profileId" => $profileId];
+        $statement->execute($parameters);
+        //fetch profile from mySQL
+        try {
+                $profile = null;
+                $statement->setFetchMode(\PDO::FETCH_ASSOC);
+                $row = $statement->fetch();
+                if($row !== false) {
+                        $tweet = new Profile($row ["profileId"], $row["profileAtHandle"], $row["profileEmail"]);
+                }
+        } catch (\Exception $exception){
+            // if the row is unable to convert, rethrow
+            throw(new \PDOException($exception->getMessage(), 0, $exception));
+        }
+        return($profile);
+    }
 
 }
 
