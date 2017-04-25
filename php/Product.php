@@ -162,6 +162,93 @@ class Product implements \jsonSerialize{
         $this->productDate = $newProductDate;
     }
 
+    /**
+     * Inserts product into mySQL
+     * @param \PDO $pdo PDO connection object
+     * @throws \PDOException when mySQL errors occur
+     * @throws  \TypeError if $pdo is not PDO connection object
+     */
+
+    public function insert(\PDO $pdo) : void {
+        // enforce the productId is null
+        if($this->productId !== null) {
+            throw(new \PDOException("not a new product"));
+        }
+        //create query
+        $query = "INSERT INTO product(productId, productContent, productPrice, productDate) VALUES (:productId, :productContent, :productPrice, :productDate)";
+        $statement = $pdo->prepare($query);
+        // bind members to their place holders
+        $formattedDate = $this->productDate->format("Y-m-d H:i:s:u");
+        $parameters = ["productId" => $this->productId, "productContent" => $this->productContent, "productPrice" => $this->productPrice, "productDate" => $formattedDate];
+        $statement->execute($parameters);
+        $this->productId = intval($pdo->lastInsertId());
+    }
+    /**
+     * Deletes product from mySQL
+     * @param \PDO $pdo PDO connection object
+     * @throws \PDOException when mySQL errors occur
+     * @throws  \TypeError if $pdo is not PDO connection object
+     */
+
+    public function delete(\PDO $pdo) : void {
+        //enforce that the product is not null i.e. that it exists
+        if($this->productId === null) {
+                throw(new \PDOException("unable to delete a product that does not exist"));
+        }
+        //create a query
+        $query = "DELETE FROM product WHERE productId = :productId";
+        $statement = $pdo->prepare($query);
+        // bind members to their place
+        $parameters = ["productId" => $this->productId];
+        $statement->execute($parameters);
+
+    }
+
+    /**
+     * Updates a product in mySQL
+     * @param \PDO $pdo PDO connection object
+     * @throws \PDOException when mySQL errors occur
+     * @throws  \TypeError if $pdo is not PDO connection object
+     */
+
+    public function updated(\PDO $pdo) : void {
+        // enforce the productId is null
+        if($this->productId !== null) {
+            throw(new \PDOException("not a new product"));
+        }
+        $query = "UPDATE product SET productContent = :productContent, productPrice = :productPrice, productDate = :productDate WHERE productId = :productId";
+        $statement = $pdo->prepare($query);
+        //binds members to their place holder
+        $formattedDate = $this->productDate->format("Y-m-d H:i:s:u");
+        $parameters = ["productContent" => $this->productContent, "productPrice" => $this->productPrice, "productDate" => $formattedDate];
+        $statement->execute($parameters);
+    }
+
+    public static function getProductByProductId(\PDO $pdo, int $productId) : ?Product {
+        // sanitize this product id
+        if($productId <= 0) {
+                throw(new \PDOException("product id is not positive"));
+        }
+        //create query
+        $query = "SELECT productId, productContent, productPrice, productDate FROM product WHERE productId = :productId";
+        $statement = $pdo->prepare($query);
+        $parameters = ["productId => $productId"];
+        $statement->execute($parameters);
+        //fetch product from mySQL
+        try {
+            $product = null;
+            $statement->setFetchMode(\PDO::FETCH_ASSOC);
+            $row = $statement->fetch();
+            if($row !== false) {
+                $product = new Product($row ["productId"], $row ["productContent"], $row ["productPrice"], $row ["productDate"]);
+            }
+
+        } catch (\Exception $exception) {
+            // if row is unable to convert, rethrow
+            throw(new \PDOException($exception->getMessage(), 0, $exception));
+        }
+        return($productId);
+    }
 
 /**
  * formats the state variables for JSON serialization
