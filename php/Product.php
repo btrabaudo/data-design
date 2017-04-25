@@ -223,6 +223,39 @@ class Product implements \jsonSerialize{
         $parameters = ["productContent" => $this->productContent, "productPrice" => $this->productPrice, "productDate" => $formattedDate];
         $statement->execute($parameters);
     }
+    /**
+     * joins profile Id, At Handle with a product ID
+     * @param \PDO $pdo PDO connection object
+     * @param $productId
+     * @return $productProfileTable
+     * @throws \PDOException when mySQL errors occur
+     * @throws  \TypeError if $pdo is not PDO connection object
+     **/
+    public function select(\PDO $pdo, int $productId) : \SplObjectStorage {
+        // enforce that profileId is not null
+        if($this->productId !== null) {
+            throw (new \PDOException("This profile does not exsist"));
+        }
+        $query = "SELECT profile.profileId, profile.profileAtHandle FROM profile JOIN profile ON product.productId";
+        $statement = $pdo->prepare($query);
+        $parameters = ["productId => $productId"];
+        $statement->execute($parameters);
+        //fetch productProfileTable
+        try {
+            $productProfileTable = null;
+            $statement ->setFetchMode(\PDO::FETCH_ASSOC);
+            $column= $statement->fetch();
+            if($column !== false) {
+                $productProfileTable = new Product($column ["profileId"], $column ["profileAtHandle"], $column ["productId"]);
+            }
+
+        } catch (\PDOException $exception) {
+            throw(new \PDOException($exception->getMessage(), 0, $exception));
+        }
+        return($productProfileTable);
+
+    }
+
 
     public static function getProductByProductId(\PDO $pdo, int $productId) : ?Product {
         // sanitize this product id
@@ -247,14 +280,16 @@ class Product implements \jsonSerialize{
             // if row is unable to convert, rethrow
             throw(new \PDOException($exception->getMessage(), 0, $exception));
         }
-        return($productId);
+        return($product);
     }
 
-/**
- * formats the state variables for JSON serialization
- *
- * @return array resulting state variables to serialize
- **/
+
+
+    /**
+    * formats the state variables for JSON serialization
+    *
+    * @return array resulting state variables to serialize
+    **/
 
     public function jsonSerialize() {
         $fields = get_object_vars($this);
