@@ -296,12 +296,9 @@ class Profile {
             throw(new \PODException ("unable to update a profile that does not exisit"));
         }
         // create query
-        $query = "UPDATE profile SET profileId = :profileId, profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileEmail = :profileEmail, profilePassHash = :profilePassHash, profileSaltHash = :profileSaltHash";
+        $query = "DELETE FROM profile WHERE profileId = :profileId";
         $statement = $pdo->prepare($query);
-
-        //bind the variables to the place holders in the template
-
-        $parameters = ["profileId" => $this->profileId, "profileActivationToken" => $this-> profileActivationToken, "profileAtHandle" => $this-> profileAtHandle, "profileEmail" => $this->profileEmail, "profilePassHash" => $this->profilePassHash, "profileSaltHash" => $this->profileSaltHash];
+        $parameters = ["profileId" => $this->profileId];
         $statement->execute($parameters);
     }
 
