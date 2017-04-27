@@ -72,7 +72,7 @@ try {
 
         // Gets the JSON package that the user sent, and stores it in $requestContent. THe php://input will get the request. file_get_contents is a php function that reads a file INTO a string. In this case it will read into php://input. This is a read only stream that takes the data from the front end. In this case it is a JSON package but presumably it could be another kind.
 
-        $requestObject = json_decode($requestEmail);
+        $requestObject = json_decode($requestContent);
           // the above line decodes the JSON package and puts it in the variable $requestContent
 
         if(empty($requestObject->profileEmail) === true) {
