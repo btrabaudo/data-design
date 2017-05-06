@@ -151,7 +151,7 @@ class Profile {
             throw(new \InvalidArgumentException("profile at handle must contain only alphanumeric characters"));
         }
         //enforce max string length on profile at handle
-        if (strlen($newProfileAtHandle) !== 32) {
+        if (strlen($newProfileAtHandle) > 32) {
             throw(new \RangeException("profile at handle exceeds length limit"));
 
         }
@@ -181,7 +181,7 @@ class Profile {
             throw(new \InvalidArgumentException("profile email is empty"));
         }
         //enforce max string length on profile email
-        if (strlen($newProfileEmail) !== 32) {
+        if (strlen($newProfileEmail) > 32) {
             throw(new \RangeException("profile email exceeds length limit"));
 
         }

@@ -106,7 +106,7 @@ class Product implements \jsonSerialize{
         }
 
         //enforce 128 characters in product content
-        if (strlen($newProductContent) !== 128) {
+        if (strlen($newProductContent) > 128) {
             throw(new \RangeException("product content must be 128 characters"));
         }
 
