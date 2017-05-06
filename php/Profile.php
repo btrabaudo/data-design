@@ -35,7 +35,6 @@ class Profile {
      */
     private $profileSaltHash;
 
-    /** There should be a public function construct here */
 
     public function __construct(?int $newProfileId, string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, string $newProfilePassHash, string $newProfileSaltHash) {
         try {
@@ -59,9 +58,7 @@ class Profile {
      * @return int|null value of profile id
      */
 
-    /**
-     * @return int|null value
-     */
+
     public function getProfileId() : ?int {
         return($this->profileId);
     }
@@ -75,12 +72,12 @@ class Profile {
 
 
     public function setProfileId(?int $newProfileId) : void {
-        //if new tweet if is null return it immediately
+        //if new profile if is null return it immediately
         if($newProfileId === null) {
             $this->profileId = null;
             return;
         }
-        // verify the tweet id is positive
+        // verify the profile id is positive
         if($newProfileId <=0) {
             throw(new \RangeException("profile id is not positive"));
         }
