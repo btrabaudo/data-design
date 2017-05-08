@@ -270,7 +270,7 @@ class Profile {
      */
     public function insert(\PDO $pdo) : void {
         if($this->profileId === null) {
-            throw(new \PDOException("unable to delete a profile that does not exist"));
+            throw(new \PDOException("unable to insert a profile that does not exist"));
         }
          $query = "INSERT INTO profile(profileID, profileActivationToken, profileAtHandle, profileEmail, profilePassHash, profilePassSalt) VALUES (:profileId, :profileActicationToken, :profileAtHandle, :profileEmail, :profilePassHash, :profilePassSalt)";
         $statement = $pdo->prepare($query);
@@ -290,7 +290,7 @@ class Profile {
         //enforces that profileId is not null
 
         if($this->profileId === null) {
-            throw(new \PODException ("unable to update a profile that does not exisit"));
+            throw(new \PODException ("unable to delete a profile that does not exist"));
         }
         // create query
         $query = "DELETE FROM profile WHERE profileId = :profileId";
