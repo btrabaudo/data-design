@@ -270,7 +270,7 @@ class Profile {
      */
     public function insert(\PDO $pdo) : void {
         if($this->profileId === null) {
-            throw(new \PDOException("unable to delete a tweet that does not exist"));
+            throw(new \PDOException("unable to delete a profile that does not exist"));
         }
          $query = "INSERT INTO profile(profileID, profileActivationToken, profileAtHandle, profileEmail, profilePassHash, profilePassSalt) VALUES (:profileId, :profileActicationToken, :profileAtHandle, :profileEmail, :profilePassHash, :profilePassSalt)";
         $statement = $pdo->prepare($query);
